@@ -13,27 +13,40 @@ class Computer
   def create(filename)
     time = Time.now
     @files[filename] = time
-    puts "A new file '#{filename}' was created by '#{@username}' on #{time}"
+    puts "'#{filename}' was created by '#{@username}' on #{time}"
     puts @files
   end
 
   def update(filename, newTime)
     if @files.has_key?(filename)
       @files[filename] = newTime
-      puts "File has been updated!"
+      puts "#{filename} has been updated!"
     else
-      puts "That file doesn't exist!"
+      puts "#{filename} doesn't exist!"
+    end
+  end
+  
+  def update_status(filename, status)
+    if (@files.include?(filename))
+      @files[filename][:status] = status
+      puts "Status updated for #{filename}"
+    else 
+      puts "#{filename} doesn't exist!"
     end
   end
 
   def delete(filename)
     if @files.has_key?(filename)
       @files.delete(filename)
-      puts "File has been deleted!"
+      puts "#{filename} has been deleted!"
     else
-      puts "That file doesn't exist!"
+      puts "#{filename} doesn't exist!"
     end
     puts @files
+  end
+  
+  def list_files
+    return @files
   end
 end
 
